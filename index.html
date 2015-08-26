@@ -341,7 +341,7 @@
           <div class="col-xs-12 col-sm-12 col-lg-4">
             <center>
               <a href=
-              "https://donorsearch.leadpages.co/leadbox/146189833f72a2%3A134634d38b46dc/5707967177424896/"
+              "http://www.donorsearch.net/get-a-demo/"
               target="_blank" class="footerLink">Have 200 names?</a>
             </center>
           </div>
@@ -379,7 +379,7 @@
     "myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" id="headerTop">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
             onclick="resultsClose();"><span aria-hidden="true">&#215;</span></button>
 
@@ -425,10 +425,10 @@
     var i=h.Count.gifts+h.Count.fec;var j=h.Count.fecShowing+h.Count.giftsShowing;
     if(h.bio){addToResults('<center><div class="alert alert-info" role="alert">'+h.bio+"<\/div><\/center>")}
     addToResults('<div class="alert alert-success" role="alert" id="counts">Showing '+j+" of "+i+" <\/div>");
-    $.each(h.Data,function(k,l){addToResults('<div class="row"><div class="no-pad col-xs-12 col-sm-12 col-lg-12"><div class="panel panel-default"><div class="panel-heading"><div class="panel-title"><h3><center>'+l.Organization_Name+"<\/center><\/h3><\/div><\/div>");addToResults('<div class="panel-body"><b><center>'+l.Donor_Name+"<\/center><\/b>");addToResults('<div class="row"><div class="col-xs-12 col-sm-12 col-lg-12"><center>Gift Amount Range: <\/b><br/>'+l.lowgift_level+" - "+l.highgift_level+"<\/center><\/div><\/div>");addToResults('<div class="row"><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>Gift Type<\/b><br/>'+l.Gift_Type+'<\/center><\/div><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>State<\/b><br/>'+l.State+'<\/center><\/div><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>Gift Year<\/b><br/>'+l.Gift_Year+"<\/center><\/div><\/div>");addToResults("<\/div><\/div><\/div><\/div>")});addToResults('<div class="row modalLinks"><div class="footerLinks"><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="https://donorsearch.leadpages.co/leadbox/146189833f72a2%3A134634d38b46dc/5707967177424896/" target="_blank" class="footerLink">Have 200 names?<\/a><br/><hr class="modalHR"><\/center><\/div><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="http://www.donorsearch.net" class="footerLink">DonorSearch.net<\/a><br/><hr class="modalHR"><\/center><\/div><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="http://www.donorsearch.net/contact/" class="footerLink">Contact Us<\/a><\/center><\/div><\/div><\/div>');$("#resultsModal").html(htmlToAdd)},error:function(){stopSpinner();addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');$("#resultsModal").html(htmlToAdd)}})}
+    $.each(h.Data,function(k,l){addToResults('<div class="row"><div class="no-pad col-xs-12 col-sm-12 col-lg-12"><div class="panel panel-default"><div class="panel-heading"><div class="panel-title"><h3><center>'+l.Organization_Name+"<\/center><\/h3><\/div><\/div>");addToResults('<div class="panel-body"><b><center>'+l.Donor_Name+"<\/center><\/b>");addToResults('<div class="row"><div class="col-xs-12 col-sm-12 col-lg-12"><center>Gift Amount Range: <\/b><br/>'+l.lowgift_level+" - "+l.highgift_level+"<\/center><\/div><\/div>");addToResults('<div class="row"><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>Gift Type<\/b><br/>'+l.Gift_Type+'<\/center><\/div><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>State<\/b><br/>'+l.State+'<\/center><\/div><div class="col-xs-4 col-sm-4 col-lg-4"><center><b>Gift Year<\/b><br/>'+l.Gift_Year+"<\/center><\/div><\/div>");addToResults("<\/div><\/div><\/div><\/div>")});addToResults('<div class="row modalLinks"><div class="footerLinks"><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="http://www.donorsearch.net/get-a-demo/" target="_blank" class="footerLink">Have 200 names?<\/a><br/><hr class="modalHR"><\/center><\/div><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="http://www.donorsearch.net" class="footerLink">DonorSearch.net<\/a><br/><hr class="modalHR"><\/center><\/div><div class="col-xs-12 col-sm-12 col-lg-12"><center><a href="http://www.donorsearch.net/contact/" class="footerLink">Contact Us<\/a><\/center><\/div><\/div><\/div>');$("#resultsModal").html(htmlToAdd)},error:function(){stopSpinner();addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');$("#resultsModal").html(htmlToAdd)}})}
     function addToResults(a){htmlToAdd=htmlToAdd+a}
     function buildResultsHtml(a){}
-    function stopSpinner(){$("#loader").css("visibility","hidden")}
+    function stopSpinner(){$("#loader").css("visibility","hidden");}
     function startSpinner(){$("#resultsModal").html('<center><div class="loader" id="loader"><\/div><\/center>');$("#loader").css("visibility","visible");}
     function sgSelect(a){$("#sg1").removeClass("btn-primary");$("#sg2").removeClass("btn-primary");$("#sg3").removeClass("btn-primary");$(a).addClass("btn-primary");
     showGifts=$(a).attr("value")}
