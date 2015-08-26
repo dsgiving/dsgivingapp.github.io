@@ -412,6 +412,7 @@
     function resultsClose(){$("#resultsModal").empty();
     $("#resultsModal").html('<center><div class="loader" id="loader"><\/div><\/center>')}
     function send(){
+      $("#resultsModal").empty();
       htmlToAdd="";
     var b=$("#state option:selected").val();
     var a=$("#searchbox").val();if(a.length<2){alert("Please type in a search first");return}sendRequest(a,b,showGifts,orderBy)}
@@ -428,14 +429,15 @@
     function addToResults(a){htmlToAdd=htmlToAdd+a}
     function buildResultsHtml(a){}
     function stopSpinner(){$("#loader").css("visibility","hidden")}
-    function startSpinner(){$("#loader").css("visibility","visible")}
+    function startSpinner(){$("#resultsModal").html('<center><div class="loader" id="loader"><\/div><\/center>');$("#loader").css("visibility","visible");}
     function sgSelect(a){$("#sg1").removeClass("btn-primary");$("#sg2").removeClass("btn-primary");$("#sg3").removeClass("btn-primary");$(a).addClass("btn-primary");
     showGifts=$(a).attr("value")}
     function typeSelect(a){$("#type1").removeClass("btn-primary");$("#type2").removeClass("btn-primary");orderBy=$(a).attr("value");
     $(a).addClass("btn-primary")}
-    function nameInputTouched(){$(location).attr("href","#searchHeader");$("#searchbox").attr("placeholder","");
-    $("#searchbox").value="";
+    function nameInputTouched(){$("#searchbox").attr("placeholder","");
+    $("#searchbox").val('');
     $("#searchbox").focus()};
+    $("#searchbox").keypress(function (e) {if(e.which == 13){e.preventDefault(); send()}});
     //]]>
     </script>
   </div>
