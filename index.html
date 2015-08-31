@@ -421,7 +421,7 @@ Be a star. Be creative. Share the dsgiving.com link with any nonprofit or develo
     var b=$("#state option:selected").val();
     var a=$("#searchbox").val();if(a.length<2){alert("Please type in a search first");return}sendRequest(a,b,showGifts,orderBy)}
     function sendRequest(d,e,g,f){
-      ga('send', 'pageview', '/?name:'+d+'&state:'+e);
+      ga('send', 'pageview', '/?name='+d+'&state='+e);
       $("#myModal").modal("show");
       startSpinner();
       var b="No";
