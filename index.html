@@ -426,7 +426,7 @@ Be a star. Be creative. Share the dsgiving.com link with any nonprofit or develo
       startSpinner();
       var b="No";
       var a="No";
-    var c=$.ajax({url:"http://findgiving.com/search.php",dataType:"json",type:"POST",data:{search:d,Exact:b,NN:a,state:e,showGifts:g,orderBy:f},jsonpCallback:"jcall",success:function(h){stopSpinner();if(h=="fail"){addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');$("#resultsModal").html(htmlToAdd);return}
+    var c=$.ajax({url:"https://www.donorlead.net/app/search.php",dataType:"json",type:"POST",data:{search:d,Exact:b,NN:a,state:e,showGifts:g,orderBy:f},jsonpCallback:"jcall",success:function(h){stopSpinner();if(h=="fail"){addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');$("#resultsModal").html(htmlToAdd);return}
     if(h.Count == null){addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');$("#resultsModal").html(htmlToAdd);return false;}
     var i=h.Count.gifts+h.Count.fec;var j=h.Count.fecShowing+h.Count.giftsShowing;
     if(h.bio && i > 0 ){addToResults('<center><div class="alert alert-info" role="alert">'+h.bio+"<\/div><\/center>");}
