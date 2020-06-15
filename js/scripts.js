@@ -66,7 +66,6 @@
 var htmlToAdd=""; 	// to display search results
 var showGifts=1;   	// sort and order options for search
 var orderBy=1;		// sort and order options for search
-var newVisitor = true;  
 
 //
 // check visit count cookie
@@ -75,15 +74,25 @@ var newVisitor = true;
 //
 var visit = getCookie("hsDS");
 var superuser = getCookie("hsDS25");
+var visit10 = getCookie("hsDS10");
+var legacy = getCookie("hsDSL");
 
+// code changed 6-8-20 to allow 10 searches before form displays 
+// hsDSL will determine whether user has already filled out form. 
+// (only set for new users) 
+// prevents prior users from having to fill out form again.
+// 
+if (legacy == "" || visit == null) {
+	legacy = "Y";
+}else {
+	legacy = "N";
+}	
 if (visit == "" || visit == null) {
-    newVisitor = true;
+	visit = 0;
+	setCookie("hsDSL", 'N', 365);
+	legacy = "N";
 }
-else{
-    newVisitor = false;
-    visit++;
-    setCookie("hsDS", visit, 365);
-}
+
 
 //
 // show results on screenModal close (even if form not submitted)
@@ -141,37 +150,31 @@ function send(){
 		//
 		//	update hubspot hidden input fields with current search info
 		//
-		// push hubspot event to track name searched -- not really sure this is giving us what
-		//  we're looking for. 
+		// push hubspot event to track name searched
 		//
  		_hsq.push(["trackEvent",{
 			id:"dsgiving_usage",
 			value:visit
 		}]); 
+		visit++;
+		setCookie("hsDS", visit, 365);
 		//
-		//  if first time visitor (or cache cleared) request user info
+		//  after 10 searches(required), visitor to fill out lead form (visit10 and hsDS10)
+		//  after 20 searches,(optional) display screening form 
+		//  after 50 searches, (required )visitor must fill out client feedback form or get a demo
 		//
-		if (newVisitor){
-            $("#captureModal").modal("show");
-            $("#myModal").modal("hide");
-			if (visit){
-				newVisitor = false;
-			}
-        }else{
-			visit++;
-			setCookie("hsDS", visit, 365);
-			if (visit == 10 || visit == 20){
-				$("#screenModal").modal("show");
-				$("#myModal").modal("hide");
-			}
-			else if (visit >= 25 && (superuser == "" || superuser == null)){
-				$("#limitModal").modal("show");
-				$("#myModal").modal("hide");
-				
-			} else{				
-				$("#captureModal").modal("hide");
-				$("#myModal").modal("show");
-			}
+		if (visit > 9 && (visit10 == null || visit10 == "") && legacy == 'N'){
+			$("#captureModal").modal("show");
+			$("#myModal").modal("hide");
+		}else if (visit == 20 ){
+			$("#screenModal").modal("show");
+			$("#myModal").modal("hide");
+		}else if (visit >= 50 && (superuser == "" || superuser == null)){
+			$("#limitModal").modal("show");
+			$("#myModal").modal("hide");
+		}else{				
+			$("#captureModal").modal("hide");
+			$("#myModal").modal("show");
 		}
         startSpinner();
         var match="No";
@@ -185,19 +188,23 @@ function send(){
             success:function(results){
                 stopSpinner();
                 if(results=="fail"){
-                addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');
-                $("#resultsModal").html(htmlToAdd);
-                return;
+					addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');
+					$("#resultsModal").html(htmlToAdd);
+					return;
                 }
                 if(results.Count == null){
                     addToResults('<div class="alert alert-danger" role="alert">No Results Found.<\/div>');
                     $("#resultsModal").html(htmlToAdd);return false;
                 }
+				var showState = st;
                 var i=results.Count.gifts+results.Count.fec;
                 var j=results.Count.fecShowing+results.Count.giftsShowing;
-                    $('#myModalLabel').html(i+' results found for <strong>'+name+'('+st+')'+'</strong>');
-                $('#captureModalLabel').html(i+' results found for <strong>'+name+'('+st+')'+'</strong>');
-                    if(results.bio && i > 0 ){
+				if (showState == 'ZZ'){
+					showState = 'Any';
+				}
+                $('#myModalLabel').html(i+' results found for <strong>'+name+'('+showState+')'+'</strong>');
+                $('#captureModalLabel').html(i+' results found for <strong>'+name+'('+showState+')'+'</strong>');
+                if(results.bio && i > 0 ){
                     addToResults('<center><div class="alert alert-info" role="alert">'+results.bio+"<\/div><\/center>");
                 }
                 addToResults('<div class="alert alert-success" role="alert" id="counts">Showing '+j+" of "+i+" <\/div>");
