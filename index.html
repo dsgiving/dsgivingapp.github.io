@@ -480,7 +480,7 @@
     "captureModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="headerTop">
+          <div class="modal-header" id="captureHeaderTop">
 		    <center>
               <h4 class="modal-title" id="captureModalLabel"> </h4>
             </center>
@@ -509,10 +509,10 @@
 					//
 					// hide hubspot form and show results modal
 					// and set cookie
-					setCookie("hsDS", 1, 365);
+					setCookie("hsDS10", "Y", 365);
+					visit10 = "Y";
 					$("#captureModal").modal("hide");
 					$("#myModal").modal("show");
-					newVisitor = false;
 				} 
 			});
 			</script>
@@ -569,7 +569,7 @@
             onclick="resultsClose();"><span aria-hidden="true">&#215;</span></button>
           </div>
 
-          <div class="modal-body" id="screenModalForm">
+          <div class="modal-body" id="clientModalForm">
 		            <p>Help us to improve our product by giving us some feedback.</p>
 				<!--[if lte IE 8]>
 				<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
@@ -582,6 +582,7 @@
 						$("#clientModal").modal("hide");
 						$("#myModal").modal("show");
 						setCookie("hsDS25", "Y", 365);
+						superuser = 'Y';
 					} 
 				});
 				</script>
@@ -602,7 +603,7 @@
             onclick="resultsClose();"><span aria-hidden="true">&#215;</span></button>
           </div>
 
-          <div class="modal-body" id="screenModalForm">
+          <div class="modal-body" id="demoModalForm">
 		        <p>Let's get started! Fill out the information below to get started with your free trial.</p>
 				<!--[if lte IE 8]>
 				<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
@@ -617,6 +618,7 @@
 						$("#demoModal").modal("hide");
 						$("#myModal").modal("show");
 						setCookie("hsDS25", "N", 365);
+						superuser = 'N';
 					} 
 				});
 				</script>
@@ -629,18 +631,17 @@
     "limitModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header" id="screenHeaderTop">
+          <div class="modal-header" id="limitHeaderTop">
 		    <center>
-              <h4 class="modal-title" id="screenModalLabel">Whoops! You've reached your free search limit.  </h4>
+              <h4 class="modal-title" id="limitModalLabel">Glad to see you're enjoying DSGIVING!  </h4>
             </center>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
             onclick="resultsClose();"><span aria-hidden="true">&#215;</span></button>
           </div>
 
-         <div class="modal-body" id="limitModal">
-          <p> It appears you've reached your free search limit. No worries.<BR> Just reach out to us at DonorSearch
-		  and we'll be happy to set you up with a free trial. That way you'll have full access to 
-		  all of our comprehensive datasets and analytic tools in order to find the hidden potential in your 
+         <div class="modal-body" id="limitModalForm">
+          <p> Let's get you set up with a free trial. That way you'll have full access to 
+		  all of our comprehensive datasets and analytics tools in order to help you find the hidden potential in your 
 		  donor pool. </p>
           </div>
 		  <a class="btn btn-primary btn-xl text-uppercase submit-search" onclick="getDemo();" id="getDemo" href="#">GET STARTED WITH DONORSEARCH</a>
